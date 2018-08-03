@@ -1,24 +1,40 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { withRouter } from "react-router";
 import "./App.css";
-import axios from "axios";
-require("dotenv").config();
-const AUTH_URL = "https://accounts.spotify.com/authorize?";
-const REDIRECT_URL = `${AUTH_URL}client_id=${
-  process.env.REACT_APP_SPOTIFY_CLIENT_ID
-}&redirect_uri=${
-  process.env.REACT_APP_CALLBACK_URL
-}&scope=user-read-private%20user-read-email&response_type=token&state=123`;
+import { Search } from "./Search";
+import { hashCredentials } from "./authentication/hashCredentials";
+import { redirectToSpotify } from "./authentication/redirectToSpotify";
 
-class App extends Component {
-  componentDidMount() {}
+class App extends React.Component {
+  static defaultProps = {
+    isLoggedIn: false,
+    toSearch: false
+  };
+
+  state = {
+    isLoggedIn: this.props.isLoggedIn,
+    toSearch: this.props.toSearch,
+    hashParams: ""
+  };
+
+  componentDidMount() {
+    if (this.props.history.location.pathname === "/callback/") {
+      this.setState({
+        isLoggedIn: true,
+        toSearch: true,
+        hashParams: hashCredentials()
+      });
+    }
+  }
+
   render() {
-    return (
-      <div className="App">
-        <a href={REDIRECT_URL}>Log in with spotify</a>
-      </div>
-    );
+    const { isLoggedIn, toSearch, hashParams } = this.state;
+    if (isLoggedIn && toSearch) {
+      return <Search hashParams={hashParams} />;
+    } else {
+      return <button onClick={redirectToSpotify}>Login</button>;
+    }
   }
 }
 
-export default App;
+export default withRouter(App);
