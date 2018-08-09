@@ -8,6 +8,7 @@ export const searchArtists = (uri, accessToken, collectResults, artists) => {
       }
     })
     .then(response => {
+      console.log(response)
       collectResults(response.data.artists.items)
     })
     .catch(error => {

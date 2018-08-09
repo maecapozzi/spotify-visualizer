@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { List } from './components/styled-components/List/List'
+import { ListItem } from './components/styled-components/List/ListItem'
 
 const selectArtist = (uri, accessToken) => {
   axios
@@ -18,14 +20,18 @@ const selectArtist = (uri, accessToken) => {
 }
 
 export const SearchResults = ({ results, accessToken }) => {
-  return results.map(result => {
-    return (
-      <h3
-        onClick={() => selectArtist(result.href, accessToken)}
-        key={result.name}
-      >
-        {result.name}
-      </h3>
-    )
-  })
+  return (
+    <List>
+      {results.map(result => {
+        return (
+          <ListItem
+            onClick={() => selectArtist(result.href, accessToken)}
+            key={result.name}
+          >
+            {result.name}
+          </ListItem>
+        )
+      })}
+    </List>
+  )
 }

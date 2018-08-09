@@ -1,8 +1,10 @@
 import React from 'react'
-import { SearchBar } from './SearchBar'
+import { SearchBar } from './components/base-components/SearchBar/SearchBar'
 import { SearchResults } from './SearchResults'
 import { searchArtists } from './services/searchArtists'
+import { PageContainer, Page } from './components/styled-components/Page/Page'
 
+const baseUrl = 'https://api.spotify.com/v1/search?q='
 export class Search extends React.Component {
   static defaultProps = { showResults: false }
 
@@ -14,9 +16,7 @@ export class Search extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const uri = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-      this.state.value
-    )}&type=artist`
+    const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=artist`
     searchArtists(uri, this.props.hashParams.access_token, this.collectResults)
   }
 
@@ -35,18 +35,26 @@ export class Search extends React.Component {
     const { value, showResults, results } = this.state
     if (!showResults) {
       return (
-        <SearchBar
-          value={value}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
+        <PageContainer>
+          <Page>
+            <SearchBar
+              value={value}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
+          </Page>
+        </PageContainer>
       )
     } else {
       return (
-        <SearchResults
-          results={results}
-          accessToken={this.props.hashParams.access_token}
-        />
+        <PageContainer>
+          <Page>
+            <SearchResults
+              results={results}
+              accessToken={this.props.hashParams.access_token}
+            />
+          </Page>
+        </PageContainer>
       )
     }
   }

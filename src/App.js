@@ -4,6 +4,10 @@ import './App.css'
 import { Search } from './Search'
 import { hashCredentials } from './authentication/hashCredentials'
 import { redirectToSpotify } from './authentication/redirectToSpotify'
+import { LoginButton } from './components/styled-components/Button/LoginButton'
+import { LargeText } from './components/styled-components/Text/LargeText'
+import { MediumText } from './components/styled-components/Text/MediumText'
+import { Page, PageContainer } from './components/styled-components/Page/Page'
 
 class App extends React.Component {
   static defaultProps = {
@@ -32,7 +36,18 @@ class App extends React.Component {
     if (isLoggedIn && toSearch) {
       return <Search hashParams={hashParams} />
     } else {
-      return <button onClick={redirectToSpotify}>Login</button>
+      return (
+        <PageContainer>
+          <Page>
+            <LargeText>earworm</LargeText>
+            <MediumText>
+              An app to help users understand why they love a song via granular
+              insights, while aiding and encouraging exploration and discovery.
+            </MediumText>
+            <LoginButton onClick={redirectToSpotify}>Login</LoginButton>
+          </Page>
+        </PageContainer>
+      )
     }
   }
 }
