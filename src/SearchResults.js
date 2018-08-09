@@ -1,21 +1,21 @@
-import React from "react";
-import axios from "axios";
+import React from 'react'
+import axios from 'axios'
 
 const selectArtist = (uri, accessToken) => {
   axios
     .get(uri, {
       headers: {
-        Authorization: "Bearer " + accessToken
+        Authorization: 'Bearer ' + accessToken
       }
     })
     .then(response => {
-      console.log(response);
+      console.log(response)
     })
     .catch(error => {
-      console.log(error);
-      throw new Error("Something went wrong. Please try searching again.");
-    });
-};
+      console.log(error)
+      throw new Error('Something went wrong. Please try searching again.')
+    })
+}
 
 export const SearchResults = ({ results, accessToken }) => {
   return results.map(result => {
@@ -26,6 +26,6 @@ export const SearchResults = ({ results, accessToken }) => {
       >
         {result.name}
       </h3>
-    );
-  });
-};
+    )
+  })
+}
