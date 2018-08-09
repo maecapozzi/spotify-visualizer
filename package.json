@@ -16,17 +16,20 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "format": "prettier-standard 'src/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-standard",
+      "git add"
+    ]
   },
   "devDependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
-    "@storybook/react": "^3.4.10",
-    "@storybook/addon-actions": "^3.4.10",
-    "@storybook/addon-links": "^3.4.10",
-    "@storybook/addons": "^3.4.10",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0"
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
+    "prettier-standard": "^8.0.1"
   }
 }
