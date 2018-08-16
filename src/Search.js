@@ -49,6 +49,11 @@ export class Search extends React.Component {
       return (
         <PageContainer>
           <Page>
+            <SearchBar
+              value={value}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
             <SearchResults
               results={results}
               accessToken={this.props.hashParams.access_token}
