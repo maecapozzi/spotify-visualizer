@@ -1,9 +1,9 @@
 ## To install
-Clone the repo and run `npm install`.
+Clone the repo and run `yarn install`.
 
 
 ## To run
-Run `npm start`
+Run `yarn start`
 
 ## Storybook
-`npm run storybook`
+`yarn run storybook`
