@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { Button } from './Button'
 
 export const SearchButton = Button.extend`

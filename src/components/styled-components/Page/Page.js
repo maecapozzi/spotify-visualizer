@@ -11,7 +11,9 @@ const PageContainer = styled.div`
 `
 
 const Page = styled.div`
-  padding: 5em 33%;
+  @media (min-width: 700px) {
+    padding: 5em 33%;
+  }
 `
 
 export { PageContainer, Page }

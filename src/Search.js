@@ -3,6 +3,8 @@ import { SearchBar } from './components/base-components/SearchBar/SearchBar'
 import { SearchResults } from './SearchResults'
 import { searchArtists } from './services/searchArtists'
 import { PageContainer, Page } from './components/styled-components/Page/Page'
+import { LargeText } from './components/styled-components/Text/LargeText'
+import { MediumText } from './components/styled-components/Text/MediumText'
 
 const baseUrl = 'https://api.spotify.com/v1/search?q='
 export class Search extends React.Component {
@@ -16,6 +18,8 @@ export class Search extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    e.stopPropagation()
+    console.log(e)
     const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=artist`
     searchArtists(uri, this.props.hashParams.access_token, this.collectResults)
   }
@@ -37,6 +41,8 @@ export class Search extends React.Component {
       return (
         <PageContainer>
           <Page>
+            <LargeText>Get Started</LargeText>
+            <MediumText>Search for your favorite artists</MediumText>
             <SearchBar
               value={value}
               handleChange={this.handleChange}
@@ -49,6 +55,8 @@ export class Search extends React.Component {
       return (
         <PageContainer>
           <Page>
+            <LargeText>Get Started</LargeText>
+            <MediumText>Search for your favorite artists</MediumText>
             <SearchBar
               value={value}
               handleChange={this.handleChange}
