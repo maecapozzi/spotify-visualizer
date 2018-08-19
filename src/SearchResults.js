@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { List } from './components/styled-components/List/List'
 import { ListItem } from './components/styled-components/List/ListItem'
+import { SmallText } from './components/styled-components/Text/SmallText'
 
 const selectArtist = (uri, accessToken) => {
   axios
@@ -28,7 +29,7 @@ export const SearchResults = ({ results, accessToken }) => {
             onClick={() => selectArtist(result.href, accessToken)}
             key={result.name}
           >
-            {result.name}
+            <SmallText>{result.name}</SmallText>
           </ListItem>
         )
       })}

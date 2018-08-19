@@ -19,7 +19,6 @@ export class Search extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     e.stopPropagation()
-    console.log(e)
     const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=artist`
     searchArtists(uri, this.props.hashParams.access_token, this.collectResults)
   }
