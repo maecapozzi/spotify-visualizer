@@ -3,3 +3,11 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.recharts-legend-item-text {
+  color: #A3A6A9;
+}
+
+.recharts-wrapper {
+  margin : 0 auto;
+}

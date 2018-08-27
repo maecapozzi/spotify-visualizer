@@ -12,6 +12,8 @@ import { SearchBar } from '../components/base-components/SearchBar/SearchBar'
 import { Input } from '../components/styled-components/Input/Input'
 import { List } from '../components/styled-components/List/List'
 import { ListItem } from '../components/styled-components/List/ListItem'
+import { SimpleBarChart } from '../components/base-components/Chart/BarChart'
+import { Card } from '../components/styled-components/Card/Card'
 
 storiesOf('Button', module).add('Login Button', () => (
   <LoginButton onClick={action('clicked')}>Log In to Spotify</LoginButton>
@@ -37,3 +39,10 @@ storiesOf('List', module)
       </List>
     )
   })
+
+storiesOf('Chart', module).add('SimpleBarChart', () => <SimpleBarChart />)
+storiesOf('Card', module).add('Card', () => (
+  <Card>
+    <LargeText>Time Signature: 4/4</LargeText>
+  </Card>
+))

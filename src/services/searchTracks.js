@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const searchArtists = (uri, accessToken, collectResults, artists) => {
+export const searchTracks = (uri, accessToken, collectResults, tracks) => {
   axios
     .get(uri, {
       headers: {
@@ -8,8 +8,7 @@ export const searchArtists = (uri, accessToken, collectResults, artists) => {
       }
     })
     .then(response => {
-      console.log(response)
-      collectResults(response.data.artists.items)
+      collectResults(response.data.tracks.items)
     })
     .catch(error => {
       throw new Error('Something went wrong. Please try searching again.')
