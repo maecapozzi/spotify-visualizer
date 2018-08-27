@@ -1,7 +1,7 @@
 import React from 'react'
 import { SearchBar } from './components/base-components/SearchBar/SearchBar'
 import { SearchResults } from './SearchResults'
-import { searchArtists } from './services/searchArtists'
+import { searchTracks } from './services/searchTracks'
 import { PageContainer, Page } from './components/styled-components/Page/Page'
 import { LargeText } from './components/styled-components/Text/LargeText'
 import { MediumText } from './components/styled-components/Text/MediumText'
@@ -17,10 +17,12 @@ export class Search extends React.Component {
   }
 
   handleSubmit = e => {
+    const accessToken = this.props.hashParams.access_token
     e.preventDefault()
     e.stopPropagation()
-    const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=artist`
-    searchArtists(uri, this.props.hashParams.access_token, this.collectResults)
+    const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=track`
+    searchTracks(uri, accessToken, this.collectResults)
+    sessionStorage.setItem('accessToken', accessToken)
   }
 
   collectResults = items => {
