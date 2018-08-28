@@ -17,9 +17,9 @@ export class Search extends React.Component {
   }
 
   handleSubmit = e => {
-    const accessToken = this.props.hashParams.access_token
     e.preventDefault()
     e.stopPropagation()
+    const accessToken = this.props.hashParams.access_token
     const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=track`
     searchTracks(uri, accessToken, this.collectResults)
     sessionStorage.setItem('accessToken', accessToken)

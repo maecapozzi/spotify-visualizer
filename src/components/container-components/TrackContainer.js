@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { LargeText } from '../styled-components/Text/LargeText'
+import { Dashboard } from '../base-components/Dashboard/Dashboard'
 
 export class TrackContainer extends React.Component {
   state = {
@@ -8,16 +9,44 @@ export class TrackContainer extends React.Component {
     danceability: null,
     energy: null,
     instrumentalness: null,
-    key: null,
+    keySignature: null,
     liveness: null,
     loudness: null,
     speechiness: null,
     tempo: null,
     timeSignature: null,
-    name: null
+    name: null,
+    data: null,
+    mode: null
   }
+
   componentDidMount () {
     this.getAudioAnalysis()
+  }
+
+  organizeDataToPassToChart = () => {
+    const { acousticness, danceability, energy, instrumentalness } = this.state
+
+    const data = [
+      {
+        name: 'acousticness',
+        highestPossibleValue: 1.0,
+        actualValue: acousticness
+      },
+      {
+        name: 'danceability',
+        highestPossibleValue: 1.0,
+        actualValue: danceability
+      },
+      { name: 'energy', highestPossibleValue: 1.0, actualValue: energy },
+      {
+        name: 'instrumentalness',
+        highestPossibleValue: 1.0,
+        actualValue: instrumentalness
+      }
+    ]
+
+    this.setState({ data })
   }
 
   getAudioAnalysis = () => {
@@ -41,7 +70,8 @@ export class TrackContainer extends React.Component {
           loudness,
           speechiness,
           tempo,
-          timeSignature
+          time_signature,
+          mode
         } = response.data
 
         this.setState({
@@ -49,14 +79,18 @@ export class TrackContainer extends React.Component {
           danceability,
           energy,
           instrumentalness,
-          key,
+          keySignature: key,
           liveness,
           loudness,
           speechiness,
           tempo,
-          timeSignature,
-          name: sessionStorage.getItem('trackName')
+          timeSignature: time_signature,
+          name: sessionStorage.getItem('trackName'),
+          mode
         })
+      })
+      .then(response => {
+        this.organizeDataToPassToChart()
       })
       .catch(error => {
         throw new Error('Something went wrong. Please try searching again.')
@@ -65,22 +99,31 @@ export class TrackContainer extends React.Component {
   render () {
     const {
       acousticness,
-      danceability,
-      energy,
-      instrumentalness,
-      key,
+      keySignature,
       liveness,
       loudness,
-      speechiness,
       tempo,
       timeSignature,
-      name
+      name,
+      mode,
+      data
     } = this.state
 
     if (acousticness === null) {
       return <LargeText>Loading</LargeText>
     } else {
-      return <LargeText>{name}</LargeText>
+      return (
+        <Dashboard
+          name={name}
+          data={data}
+          timeSignature={timeSignature}
+          tempo={tempo}
+          keySignature={keySignature}
+          loudness={loudness}
+          mode={mode}
+          liveness={liveness}
+        />
+      )
     }
   }
 }

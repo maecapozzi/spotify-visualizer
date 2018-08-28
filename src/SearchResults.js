@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { List } from './components/styled-components/List/List'
 import { ListItem } from './components/styled-components/List/ListItem'
 import { SmallText } from './components/styled-components/Text/SmallText'

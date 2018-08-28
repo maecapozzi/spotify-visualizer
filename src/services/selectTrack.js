@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const selectTrack = (uri, accessToken) => {
-  console.log(uri)
   axios
     .get(uri, {
       headers: {
