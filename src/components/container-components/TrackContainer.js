@@ -1,9 +1,13 @@
 import React from 'react'
 import { LargeText } from '../styled-components/Text/LargeText'
 import { Dashboard } from '../base-components/Dashboard/Dashboard'
-import { organizeDataToPassToChart } from '../../audioAnalysis'
 import { getAudioAnalysis } from '../../services/getAudioAnalysis'
-
+import {
+  determineKeySignature,
+  determineMode,
+  organizeDataToPassToChart,
+  isLive
+} from '../../audioAnalysis'
 export class TrackContainer extends React.Component {
   state = {
     acousticness: null,
@@ -82,10 +86,10 @@ export class TrackContainer extends React.Component {
           data={data}
           timeSignature={timeSignature}
           tempo={tempo}
-          keySignature={keySignature}
+          keySignature={determineKeySignature(keySignature, mode)}
           loudness={loudness}
-          mode={mode}
-          liveness={liveness}
+          mode={determineMode(mode)}
+          liveness={isLive(liveness)}
         />
       )
     }

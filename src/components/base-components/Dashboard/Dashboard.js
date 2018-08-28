@@ -50,7 +50,7 @@ export const Dashboard = props => (
         </Col>
         <Col sm={12} lg={4}>
           <Card>
-            <MediumText>Liveness: {props.liveness}</MediumText>
+            <MediumText>{props.liveness}</MediumText>
           </Card>
         </Col>
       </Row>
