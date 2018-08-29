@@ -20,13 +20,12 @@ export class TrackContainer extends React.Component {
     speechiness: null,
     tempo: null,
     timeSignature: null,
-    name: null,
     data: null,
     mode: null
   }
 
   componentDidMount () {
-    getAudioAnalysis(this.setAudioAnalysisOnState)
+    getAudioAnalysis(this.setAudioAnalysisOnState, this.props.location.state.id)
   }
 
   setAudioAnalysisOnState = (
@@ -53,7 +52,6 @@ export class TrackContainer extends React.Component {
       speechiness,
       tempo,
       timeSignature: time_signature,
-      name: sessionStorage.getItem('trackName'),
       mode,
       data: organizeDataToPassToChart(
         acousticness,
@@ -72,7 +70,6 @@ export class TrackContainer extends React.Component {
       loudness,
       tempo,
       timeSignature,
-      name,
       mode,
       data
     } = this.state
@@ -82,7 +79,7 @@ export class TrackContainer extends React.Component {
     } else {
       return (
         <Dashboard
-          name={name}
+          name={this.props.name}
           data={data}
           timeSignature={timeSignature}
           tempo={tempo}

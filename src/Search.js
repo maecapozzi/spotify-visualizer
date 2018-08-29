@@ -1,10 +1,12 @@
 import React from 'react'
+
 import { SearchBar } from './components/base-components/SearchBar/SearchBar'
 import { SearchResults } from './SearchResults'
 import { searchTracks } from './services/searchTracks'
 import { PageContainer, Page } from './components/styled-components/Page/Page'
 import { LargeText } from './components/styled-components/Text/LargeText'
 import { MediumText } from './components/styled-components/Text/MediumText'
+import { TrackContainer } from './components/container-components/TrackContainer'
 
 const baseUrl = 'https://api.spotify.com/v1/search?q='
 export class Search extends React.Component {
@@ -13,16 +15,21 @@ export class Search extends React.Component {
   state = {
     value: '',
     results: [],
-    showResults: this.props.showResults
+    showResults: this.props.showResults,
+    accessToken: null
+  }
+
+  componentDidMount () {
+    sessionStorage.setItem('accessToken', this.props.hashParams.access_token)
   }
 
   handleSubmit = e => {
     e.preventDefault()
     e.stopPropagation()
-    const accessToken = this.props.hashParams.access_token
+    this.setState({ accessToken: this.props.hashParams.access_token })
+
     const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=track`
-    searchTracks(uri, accessToken, this.collectResults)
-    sessionStorage.setItem('accessToken', accessToken)
+    searchTracks(uri, this.props.hashParams.access_token, this.collectResults)
   }
 
   collectResults = items => {
@@ -52,7 +59,7 @@ export class Search extends React.Component {
           </Page>
         </PageContainer>
       )
-    } else {
+    } else if (showResults) {
       return (
         <PageContainer>
           <Page>
@@ -63,10 +70,7 @@ export class Search extends React.Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
-            <SearchResults
-              results={results}
-              accessToken={this.props.hashParams.access_token}
-            />
+            <SearchResults getId={this.getId} results={results} />
           </Page>
         </PageContainer>
       )
