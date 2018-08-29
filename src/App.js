@@ -15,8 +15,8 @@ const router = (
         path='/track'
         render={props => <TrackContainer {...props} />}
       />
-      <Route exact path='/' component={Home} />
-      <Route exact path='/search' component={Search} />
+      <Route path='/' component={Home} />
+      <Route path='/search' component={Search} />
     </Switch>
   </Router>
 )
