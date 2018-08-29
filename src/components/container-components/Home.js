@@ -17,23 +17,21 @@ class Home extends React.Component {
   state = {
     isLoggedIn: this.props.isLoggedIn,
     toSearch: this.props.toSearch,
-    hashParams: ''
+    accessToken: null
   }
 
   componentDidMount () {
     if (this.props.history.location.pathname === '/callback/') {
-      this.setState({
-        isLoggedIn: true,
-        toSearch: true,
-        hashParams: hashCredentials()
-      })
+      const hashParams = hashCredentials()
+      this.setState({ accessToken: hashParams.access_token })
+      localStorage.setItem('accessToken', hashParams.access_token)
     }
   }
 
   render () {
-    const { isLoggedIn, toSearch, hashParams } = this.state
-    if (isLoggedIn && toSearch) {
-      return <Search {...this.props} hashParams={hashParams} />
+    const { accessToken } = this.state
+    if (accessToken) {
+      return <Search {...this.props} />
     } else {
       return (
         <PageContainer>

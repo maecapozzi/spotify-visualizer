@@ -6,7 +6,7 @@ export const getAudioAnalysis = (callback, id) => {
   axios
     .get(uri, {
       headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('accessToken')
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken')
       }
     })
     .then(response => {

@@ -6,7 +6,6 @@ import { searchTracks } from './services/searchTracks'
 import { PageContainer, Page } from './components/styled-components/Page/Page'
 import { LargeText } from './components/styled-components/Text/LargeText'
 import { MediumText } from './components/styled-components/Text/MediumText'
-import { TrackContainer } from './components/container-components/TrackContainer'
 
 const baseUrl = 'https://api.spotify.com/v1/search?q='
 export class Search extends React.Component {
@@ -20,16 +19,16 @@ export class Search extends React.Component {
   }
 
   componentDidMount () {
-    sessionStorage.setItem('accessToken', this.props.hashParams.access_token)
+    this.setState({ accessToken: localStorage.getItem('accessToken') })
   }
 
   handleSubmit = e => {
     e.preventDefault()
     e.stopPropagation()
-    this.setState({ accessToken: this.props.hashParams.access_token })
-
-    const uri = `${baseUrl}${encodeURIComponent(this.state.value)}&type=track`
-    searchTracks(uri, this.props.hashParams.access_token, this.collectResults)
+    searchTracks(
+      `${baseUrl}${encodeURIComponent(this.state.value)}&type=track`,
+      this.collectResults
+    )
   }
 
   collectResults = items => {
