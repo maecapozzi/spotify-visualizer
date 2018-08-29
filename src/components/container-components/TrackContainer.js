@@ -8,6 +8,10 @@ import {
   organizeDataToPassToChart,
   isLive
 } from '../../audioAnalysis'
+import { PageContainer, Page } from '../styled-components/Page/Page'
+import { SearchButton } from '../styled-components/Button/SearchButton'
+import { StyledLink } from '../styled-components/Link/Link'
+
 export class TrackContainer extends React.Component {
   state = {
     acousticness: null,
@@ -75,19 +79,30 @@ export class TrackContainer extends React.Component {
     } = this.state
 
     if (acousticness === null) {
-      return <LargeText>Loading</LargeText>
+      return (
+        <PageContainer>
+          <Page>
+            <LargeText>Loading</LargeText>
+          </Page>
+        </PageContainer>
+      )
     } else {
       return (
-        <Dashboard
-          name={this.props.name}
-          data={data}
-          timeSignature={timeSignature}
-          tempo={tempo}
-          keySignature={determineKeySignature(keySignature, mode)}
-          loudness={loudness}
-          mode={determineMode(mode)}
-          liveness={isLive(liveness)}
-        />
+        <PageContainer>
+          <SearchButton>
+            <StyledLink to='/'>Search Again</StyledLink>
+          </SearchButton>
+          <Dashboard
+            name={this.props.location.state.name}
+            data={data}
+            timeSignature={timeSignature}
+            tempo={tempo}
+            keySignature={determineKeySignature(keySignature, mode)}
+            loudness={loudness}
+            mode={determineMode(mode)}
+            liveness={isLive(liveness)}
+          />
+        </PageContainer>
       )
     }
   }
