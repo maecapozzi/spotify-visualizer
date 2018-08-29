@@ -2,7 +2,7 @@ import React from 'react'
 import { List } from './components/styled-components/List/List'
 import { ListItem } from './components/styled-components/List/ListItem'
 import { SmallText } from './components/styled-components/Text/SmallText'
-import { Link } from 'react-router-dom'
+import { StyledLink } from '../src/components/styled-components/Link/Link'
 
 export const SearchResults = ({ results }) => {
   return (
@@ -10,14 +10,14 @@ export const SearchResults = ({ results }) => {
       {results.map(result => {
         return (
           <ListItem key={result.id}>
-            <Link
+            <StyledLink
               to={{
                 pathname: '/track',
                 state: { id: result.id }
               }}
             >
               <SmallText>{result.name}</SmallText>
-            </Link>
+            </StyledLink>
           </ListItem>
         )
       })}
