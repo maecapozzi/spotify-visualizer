@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-export const getAudioAnalysis = callback => {
-  const id = sessionStorage.getItem('trackId')
+export const getAudioAnalysis = (callback, id) => {
   const uri = `https://api.spotify.com/v1/audio-features/${id}`
 
   axios
