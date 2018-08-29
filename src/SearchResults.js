@@ -8,15 +8,16 @@ export const SearchResults = ({ results }) => {
   return (
     <List>
       {results.map(result => {
+        const { id, name } = result
         return (
-          <ListItem key={result.id}>
+          <ListItem key={id}>
             <StyledLink
               to={{
                 pathname: '/track',
-                state: { id: result.id }
+                state: { id: id, name: name }
               }}
             >
-              <SmallText>{result.name}</SmallText>
+              <SmallText>{name}</SmallText>
             </StyledLink>
           </ListItem>
         )
