@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from '../../styled-components/Input/Input'
 import { SearchButton } from '../../styled-components/Button/SearchButton'
-import { Link } from 'react-router-dom'
+import { StyledLink } from '../../styled-components/Link/Link'
 
 export const SearchBar = ({ value, handleChange, handleSubmit }) => {
   return (
@@ -14,7 +14,7 @@ export const SearchBar = ({ value, handleChange, handleSubmit }) => {
           onChange={handleChange}
         />
         <SearchButton onClick={handleSubmit}>
-          <Link to='/search'>Search</Link>
+          <StyledLink to='/search'>Search</StyledLink>
         </SearchButton>
       </div>
     </div>
