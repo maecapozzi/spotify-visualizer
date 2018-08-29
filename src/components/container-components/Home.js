@@ -29,10 +29,7 @@ class Home extends React.Component {
   }
 
   render () {
-    const { accessToken } = this.state
-    if (accessToken) {
-      return <Search {...this.props} />
-    } else {
+    if (localStorage.getItem('accessToken') === null) {
       return (
         <PageContainer>
           <Page>
@@ -45,6 +42,8 @@ class Home extends React.Component {
           </Page>
         </PageContainer>
       )
+    } else {
+      return <Search {...this.props} />
     }
   }
 }

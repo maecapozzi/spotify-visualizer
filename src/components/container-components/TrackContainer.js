@@ -90,7 +90,7 @@ export class TrackContainer extends React.Component {
       return (
         <PageContainer>
           <SearchButton>
-            <StyledLink to='/search'>Search Again</StyledLink>
+            <StyledLink to='/'>Search Again</StyledLink>
           </SearchButton>
           <Dashboard
             name={this.props.location.state.name}
