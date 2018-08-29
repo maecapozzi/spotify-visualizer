@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-export const searchTracks = (uri, accessToken, collectResults, tracks) => {
+export const searchTracks = (uri, collectResults) => {
   axios
     .get(uri, {
       headers: {
-        Authorization: 'Bearer ' + accessToken
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken')
       }
     })
     .then(response => {
