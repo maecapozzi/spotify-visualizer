@@ -14,6 +14,7 @@ import { List } from '../components/styled-components/List/List'
 import { ListItem } from '../components/styled-components/List/ListItem'
 import { SimpleBarChart } from '../components/base-components/Chart/BarChart'
 import { Card } from '../components/styled-components/Card/Card'
+import { SearchButton } from '../components/styled-components/Button/SearchButton'
 
 storiesOf('Button', module).add('Login Button', () => (
   <LoginButton onClick={action('clicked')}>Log In to Spotify</LoginButton>
@@ -24,7 +25,23 @@ storiesOf('Text', module)
   .add('Medium Text', () => <MediumText>Medium Text</MediumText>)
   .add('Small Text', () => <SmallText>Small Text</SmallText>)
 
-storiesOf('Search Bar', module).add('Search Bar', () => <SearchBar />)
+storiesOf('Search Bar', module).add('Search Bar', () => (
+  <SearchBar
+    children={({ value, onChange, handleSubmit }) => {
+      return (
+        <div style={{ display: 'flex', padding: '20px' }}>
+          <Input
+            placeholder='Search for an artist'
+            type='text'
+            value={value}
+            onChange={onChange}
+          />
+          <SearchButton onClick={handleSubmit}>Search</SearchButton>
+        </div>
+      )
+    }}
+  />
+))
 storiesOf('Input', module).add('Input', () => <Input />)
 
 storiesOf('List', module)
