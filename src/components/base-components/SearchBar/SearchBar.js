@@ -1,22 +1,21 @@
-import React from 'react'
-import { Input } from '../../styled-components/Input/Input'
-import { SearchButton } from '../../styled-components/Button/SearchButton'
-import { StyledLink } from '../../styled-components/Link/Link'
+import PropTypes from 'prop-types'
 
-export const SearchBar = ({ value, handleChange, handleSubmit }) => {
-  return (
-    <div>
-      <div style={{ display: 'flex', padding: '20px' }}>
-        <Input
-          placeholder='Search for an artist'
-          type='text'
-          value={value}
-          onChange={handleChange}
-        />
-        <SearchButton onClick={handleSubmit}>
-          <StyledLink to='/search'>Search</StyledLink>
-        </SearchButton>
-      </div>
-    </div>
-  )
+export const SearchBar = props => {
+  const searchProps = {
+    value: props.value,
+    handleChange: props.handleChange,
+    handleSubmit: props.handleSubmit
+  }
+  return props.searchBarProps(searchProps)
+}
+
+SearchBar.defaultProps = {
+  value: '',
+  handleChange: () => {},
+  handleSubmit: () => {}
+}
+SearchBar.propTypes = {
+  value: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
