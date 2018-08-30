@@ -1,3 +1,7 @@
+// For this to work in dev, you need to change
+// REACT_APP_CALLBACK_URL_PROD to
+// REACT_APP_CALLBACK_URL_DEV
+
 export const redirectToSpotify = () => {
   const AUTH_URL = 'https://accounts.spotify.com/authorize?'
   const REDIRECT_URL = `${AUTH_URL}client_id=${
